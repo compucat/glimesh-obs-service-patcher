@@ -123,7 +123,7 @@ func patchFile(filePath string, newService obsService) {
 	byteValue, err := ioutil.ReadAll(servicesFile)
 	json.Unmarshal(byteValue, &services)
 
-	foundGlimesh := strings.Contains(string(byteValue), "Glimesh")
+	foundGlimesh := strings.Contains(string(byteValue), "TASBot Ingest")
 
 	servicesFile.Close()
 

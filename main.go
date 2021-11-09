@@ -53,7 +53,7 @@ func (writer logWriter) Write(bytes []byte) (int, error) {
 
 func panicAndPause(v ...interface{}) {
 	log.Print(v...)
-	fmt.Println("Glimesh OBS Service Patcher Failed!\nPress the Enter key or close this window.")
+	fmt.Println("OBS Service Patcher Failed!\nPress the Enter key or close this window.")
 	fmt.Scanln()
 	os.Exit(1)
 }
@@ -61,13 +61,16 @@ func panicAndPause(v ...interface{}) {
 func main() {
 	log.SetFlags(0)
 	log.SetOutput(new(logWriter))
+	
+	fmt.Println("TASBot Ingest OBS Service Patcher");
+	fmt.Println("Original tool developed by Glimesh, MIT license");
 
-	glimeshServiceEntry := getGlimeshServiceContents("https://glimesh-static-assets.nyc3.digitaloceanspaces.com/obs-glimesh-service.json")
+	glimeshServiceEntry := getGlimeshServiceContents("https://westen.compucat.me/tasbot_ingest.json")
 
 	var glimeshService obsService
 	err := json.Unmarshal([]byte(glimeshServiceEntry), &glimeshService)
 	if err != nil {
-		panicAndPause("Problem unmarshalling Glimesh JSON entry.")
+		panicAndPause("Problem unmarshalling JSON entry.")
 	}
 
 	log.Println()
@@ -86,7 +89,7 @@ func main() {
 
 	log.Println()
 
-	fmt.Println("Glimesh OBS Service Patcher Completed!\nPress the Enter key or close this window.")
+	fmt.Println("TASBot Ingest OBS Service Patcher Completed!\nPress the Enter key or close this window.")
 	fmt.Scanln()
 }
 
@@ -105,7 +108,7 @@ func getGlimeshServiceContents(url string) []byte {
 		panicAndPause(err)
 	}
 
-	log.Printf("💽 Downloaded Glimesh Service Definition from %s\n", url)
+	log.Printf("💽 Downloaded TASBot Ingest Service Definition from %s\n", url)
 
 	return data
 }
@@ -136,7 +139,7 @@ func patchFile(filePath string, newService obsService) {
 
 		log.Printf("✅ Patched services file: %s", filePath)
 	} else {
-		log.Printf("✅ Glimesh already exists in: %s", filePath)
+		log.Printf("✅ TASBot Ingest already exists in: %s", filePath)
 	}
 }
 
